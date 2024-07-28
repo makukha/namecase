@@ -38,6 +38,12 @@ True
 >>> is_allcaps(to_allcaps(text))
 True
 
+>>> from namecase import is_title, to_title
+>>> to_title(text)
+'Some Title Phrase'
+>>> is_title(to_title(text))
+True
+
 >>> from namecase import words
 >>> words('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')
 'some,really,ME,Ssy,text,wit4,Digits,3Very,Wh3re'

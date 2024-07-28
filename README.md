@@ -7,7 +7,16 @@
 
 Small and clean, fully typed, zero dependency pure Python 2.7 to 3.13 and probably above.
 
-The package supports detection and conversion between cases: snake_case, camelCase, PascalCase, kebab-case, ALL_CAPS_CASE (aka SCREAMING_SNAKE_CASE), more to be added.
+The package supports detection and conversion between cases:
+
+* snake_case
+* camelCase
+* PascalCase
+* kebab-case
+* ALL_CAPS_CASE (aka SCREAMING_SNAKE_CASE)
+* Title Case
+
+and more to be added.
 
 
 ## Usage
@@ -80,6 +89,15 @@ True
 >>> to_allcaps(text)
 'SOME_TITLE_PHRASE'
 >>> is_allcaps(to_allcaps(text))
+True
+```
+
+#### Title Case
+```doctest
+>>> from namecase import is_title, to_title
+>>> to_title(text)
+'Some Title Phrase'
+>>> is_title(to_title(text))
 True
 ```
 

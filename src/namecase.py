@@ -33,6 +33,7 @@ RX_CAMEL = re.compile(f'{LOWER}{TITLE}*')
 RX_PASCAL = re.compile(f'{TITLE}+')
 RX_KEBAB = re.compile(f'{LOWER}(-{LOWER})*')
 RX_ALLCAPS = re.compile(f'{UPPER}(_{UPPER})*')
+RX_TITLE = re.compile(f'{TITLE}( {TITLE})*')
 
 # snake case
 
@@ -61,12 +62,7 @@ def is_pascal(text: str) -> bool:
     return True if RX_PASCAL.fullmatch(text) else False
 
 def to_pascal(text: str) -> str:
-    wrds = words(text).split(',')
-    if len(wrds) == 0:
-        value = ''
-    else:
-        value = ''.join(w.title() for w in wrds)
-    return value
+    return ''.join(w.title() for w in words(text).split(','))
 
 # kebab case
 
@@ -84,6 +80,14 @@ def is_allcaps(text: str) -> bool:
 def to_allcaps(text: str) -> str:
     return words(text).upper().replace(',', '_')
 
+# title case
+
+def is_title(text: str) -> bool:
+    return True if RX_TITLE.fullmatch(text) else False
+
+def to_title(text: str) -> str:
+    return ' '.join(w.title() for w in words(text).split(','))
+
 
 # all cases
 
@@ -93,6 +97,7 @@ CASES = {
     'kebab': to_kebab,
     'pascal': to_pascal,
     'snake': to_snake,
+    'title': to_title,
 }
 
 

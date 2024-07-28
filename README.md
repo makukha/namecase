@@ -1,11 +1,13 @@
 # namecase
+[![license](https://img.shields.io/github/license/makukha/namecase.svg)](https://github.com/makukha/namecase/blob/main/LICENSE)
+[![pypi](https://img.shields.io/pypi/v/namecase.svg)](https://pypi.python.org/pypi/namecase)
+[![versions](https://img.shields.io/pypi/pyversions/namecase.svg)](https://github.com/pydantic/pydantic)
 
-Naming case conventions parsing and converting tool.
+**Naming case conventions parsing and converting tool.**
 
 Small and clean, fully typed, zero dependency pure Python 2.7 to 3.13 and probably above.
 
----
-The package supports detection and conversion between cases: snake_case, camelCase, PascalCase, kebab-case, ALL_CAPS_CASE (aka SCREAMING_SNAKE_CASE).
+The package supports detection and conversion between cases: snake_case, camelCase, PascalCase, kebab-case, ALL_CAPS_CASE (aka SCREAMING_SNAKE_CASE), more to be added.
 
 All methods are cached for better performance.
 
@@ -118,5 +120,3 @@ task test
 * Add more test, explore edge cases
 * Add Unicode support (write tests)
 * Add more cases
-* Add GitHub Pages docs
-* Add release notes

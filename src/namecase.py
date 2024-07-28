@@ -3,14 +3,26 @@ Naming case conventions parsing and converting tool.
 """
 
 from argparse import ArgumentParser
-from functools import cache
 from io import TextIOBase
 import re
 import sys
 from typing import Self
 
 
-CASES = ('allcaps', 'camel', 'kebab', 'pascal', 'snake')
+# tokenizer
+
+RX_SIMPLE_SEP = re.compile(r'(_|\W)+')
+RX_CASE_SEP1 = re.compile(r'(?P<pre>[a-z][0-9]*)(?P<post>[A-Z])')
+RX_CASE_SEP2 = re.compile(r'(?P<pre>[A-Z][0-9]*)(?P<post>[A-Z][0-9]*[a-z])')
+
+def words(text: str) -> str:
+    values = RX_SIMPLE_SEP.sub(',', text)
+    values = RX_CASE_SEP1.sub(r'\g<pre>,\g<post>', values)
+    values = RX_CASE_SEP2.sub(r'\g<pre>,\g<post>', values)
+    return values.strip(',')
+
+
+# cases
 
 UPPER = r'(?:[A-Z0-9]+)'
 LOWER = r'(?:[a-z0-9]+)'
@@ -22,105 +34,83 @@ RX_PASCAL = re.compile(f'{TITLE}+')
 RX_KEBAB = re.compile(f'{LOWER}(-{LOWER})*')
 RX_ALLCAPS = re.compile(f'{UPPER}(_{UPPER})*')
 
+# snake case
 
-class Case(str):
-    @cache
-    def words(self) -> str:
-        return tokenize(self)
+def is_snake(text: str) -> bool:
+    return True if RX_SNAKE.fullmatch(text) else False
 
-    # snake case
+def to_snake(text: str) -> str:
+    return words(text).lower().replace(',', '_')
 
-    @cache
-    def is_snake(self) -> bool:
-        return True if RX_SNAKE.fullmatch(self) else False
+# camel case
 
-    @cache
-    def to_snake(self) -> Self:
-        value = self.words().lower().replace(',', '_')
-        return Case(value)
+def is_camel(text: str) -> bool:
+    return True if RX_CAMEL.fullmatch(text) else False
 
-    # camel case
+def to_camel(text: str) -> str:
+    wrds = words(text).split(',')
+    if len(wrds) == 0:
+        value = ''
+    else:
+        value = ''.join([wrds[0].lower(), *(w.title() for w in wrds[1:])])
+    return value
 
-    @cache
-    def is_camel(self) -> bool:
-        return True if RX_CAMEL.fullmatch(self) else False
+# pascal case
 
-    @cache
-    def to_camel(self) -> Self:
-        words = self.words().split(',')
-        if len(words) == 0:
-            value = ''
-        else:
-            value = ''.join([words[0].lower(), *(w.title() for w in words[1:])])
-        return Case(value)
+def is_pascal(text: str) -> bool:
+    return True if RX_PASCAL.fullmatch(text) else False
 
-    # pascal case
+def to_pascal(text: str) -> str:
+    wrds = words(text).split(',')
+    if len(wrds) == 0:
+        value = ''
+    else:
+        value = ''.join(w.title() for w in wrds)
+    return value
 
-    @cache
-    def is_pascal(self) -> bool:
-        return True if RX_PASCAL.fullmatch(self) else False
+# kebab case
 
-    @cache
-    def to_pascal(self) -> Self:
-        words = self.words().split(',')
-        if len(words) == 0:
-            value = ''
-        else:
-            value = ''.join(w.title() for w in words)
-        return Case(value)
+def is_kebab(text: str) -> bool:
+    return True if RX_KEBAB.fullmatch(text) else False
 
-    # kebab case
+def to_kebab(text: str) -> str:
+    return words(text).lower().replace(',', '-')
 
-    @cache
-    def is_kebab(self) -> bool:
-        return True if RX_KEBAB.fullmatch(self) else False
+# all caps case
 
-    @cache
-    def to_kebab(self) -> Self:
-        value = self.words().lower().replace(',', '-')
-        return Case(value)
+def is_allcaps(text: str) -> bool:
+    return True if RX_ALLCAPS.fullmatch(text) else False
 
-    # all caps case
-
-    @cache
-    def is_allcaps(self) -> bool:
-        return True if RX_ALLCAPS.fullmatch(self) else False
-
-    @cache
-    def to_allcaps(self) -> Self:
-        value = self.words().upper().replace(',', '_')
-        return Case(value)
+def to_allcaps(text: str) -> str:
+    return words(text).upper().replace(',', '_')
 
 
-# tokenizer
+# all cases
 
-RX_SIMPLE_SEP = re.compile(r'(_|\W)+')
-RX_CASE_SEP1 = re.compile(r'(?P<pre>[a-z][0-9]*)(?P<post>[A-Z])')
-RX_CASE_SEP2 = re.compile(r'(?P<pre>[A-Z][0-9]*)(?P<post>[A-Z][0-9]*[a-z])')
-
-
-def tokenize(text: str) -> str:
-    words = RX_SIMPLE_SEP.sub(',', text)
-    words = RX_CASE_SEP1.sub(r'\g<pre>,\g<post>', words)
-    words = RX_CASE_SEP2.sub(r'\g<pre>,\g<post>', words)
-    return words.strip(',')
+CASES = {
+    'allcaps': to_allcaps,
+    'camel': to_camel,
+    'kebab': to_kebab,
+    'pascal': to_pascal,
+    'snake': to_snake,
+}
 
 
 # cli
 
 parser = ArgumentParser(prog='namecase', description=__doc__)
 parser.add_argument('text', default=sys.stdin, nargs='?')
-parser.add_argument('-t', '--to', choices=CASES, required=True)
+parser.add_argument('-t', '--to', choices=CASES.keys(), required=True)
 
 
 def main() -> None:
     args = parser.parse_args()
-    to_case = lambda t: getattr(Case(t), f'to_{args.to}')()
-    if isinstance(args.text, TextIOBase):
-        lines = args.text.readlines()
-    else:
-        lines = [args.text]
-    values = [to_case(line) for line in lines]
+    lines = (
+        args.text.readlines()
+        if isinstance(args.text, TextIOBase)
+        else args.text.splitlines()
+    )
+    values = [CASES[args.to](line) for line in lines]
     print(*values, sep='\n')
 
 

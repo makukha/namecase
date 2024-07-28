@@ -97,6 +97,7 @@ CASES = {
     'kebab': to_kebab,
     'pascal': to_pascal,
     'snake': to_snake,
+    'title': to_title,
 }
 
 

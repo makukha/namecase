@@ -1,0 +1,56 @@
+version: '3'
+
+tasks:
+
+  init:
+    desc: Initialize dev environment.
+    cmds:
+      - brew install poetry pyenv tox zlib
+      - pyenv install --skip-existing $(pyenv local)
+      - poetry env use $(pyenv prefix $(pyenv local))/bin/python
+      - task: init:python
+      - task: install
+
+  init:python:
+    internal: true
+    sources:
+      - tox.ini
+    vars:
+      VERSIONS:
+        sh: poetry run python bin/dev.py get-python-versions
+    cmds:
+      - cmd: pyenv install --skip-existing {{.ITEM}}
+        for: {var: VERSIONS}
+
+  install:
+    desc: Install dev environment packages.
+    cmds:
+      - poetry lock --no-update
+      - poetry install --with dev
+
+  build:package:
+    internal: true
+    cmds:
+      - poetry build -f wheel
+
+  build:test_readme:
+    internal: true
+    sources: [README.md]
+    generates: [tests/test_readme.txt]
+    cmds:
+      - poetry run python bin/dev.py get-markdown-code --lang=doctest README.md
+          > tests/test_readme.txt
+
+  test:
+    desc: Run tests.
+    deps: [build:test_readme, build:package]
+    vars:
+      VERSION: {sh: poetry version --short}
+    cmds:
+      - tox run --installpkg dist/namecase-{{.VERSION}}-py2.py3-none-any.whl
+
+  publish:
+    desc: Publish package on PyPi.
+    # NOTE: to actually publish, run the command without --dry-run
+    cmds:
+      - poetry publish --dry-run

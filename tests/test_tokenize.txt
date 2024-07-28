@@ -1,0 +1,51 @@
+>>> from namecase import Case
+
+Case object is tokenized to a comma separated list of words, preserving case.
+
+    >>> Case('Space separated phrase').words()
+    'Space,separated,phrase'
+
+Digit is a part of the word:
+
+    >>> Case('some_0_Digits111').words()
+    'some,0,Digits111'
+
+All non-word characters including underscore are word separators:
+
+    >>> ascii = ''.join(str(chr(c)) for c in range(256))
+    >>> import re
+    >>> sep = '_' + re.sub(r'\w', '', ascii)
+    >>> set(Case(f'Word1{s}Word2').words() for s in sep) == {'Word1,Word2'}
+    True
+
+When text case is changed from lower to upper, this is also a word separator, but
+case change from upper to lower is not:
+
+    >>> Case('ErrorType').words()
+    'Error,Type'
+
+When case is changed from lower to upper and there are digits in between,
+separator is added after the digits:
+
+    >>> Case('Http404Error').words()
+    'Http404,Error'
+    >>> Case('Http404error').words()
+    'Http404error'
+
+If there are multiple upper case letters followed by a lower case, the separator is
+inserted before the last upper letter:
+
+    >>> Case('HTTPError').words()
+    'HTTP,Error'
+    >>> Case('HTTP2Error').words()
+    'HTTP2,Error'
+
+Initial and trailing separators are stripped:
+
+    >>> Case('_some_name_').words()
+    'some,name'
+
+Multiple separators are treated as one:
+
+    >>> Case('some-._name').words()
+    'some,name'

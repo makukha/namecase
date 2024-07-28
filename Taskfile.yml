@@ -43,7 +43,7 @@ tasks:
 
   test:
     desc: Run tests.
-    deps: [build:test_readme, build:package]
+    deps: [install, build:test_readme, build:package]
     vars:
       VERSION: {sh: poetry version --short}
     cmds:

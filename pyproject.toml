@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "namecase"
-version = "0.2.0"
+version = "0.3.0"
 description = "Naming case conventions parsing and converting tool."
 authors = ["Michael Makukha <m.makukha@gmail.com>"]
 license = "MIT"

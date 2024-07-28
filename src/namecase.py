@@ -105,7 +105,7 @@ CASES = {
 
 parser = ArgumentParser(prog='namecase', description=__doc__)
 parser.add_argument('text', default=sys.stdin, nargs='?')
-parser.add_argument('-t', '--to', choices=CASES.keys(), required=True)
+parser.add_argument('-c', '--case', choices=CASES.keys(), required=True)
 
 
 def main() -> None:
@@ -115,7 +115,7 @@ def main() -> None:
         if isinstance(args.text, TextIOBase)
         else args.text.splitlines()
     )
-    values = [CASES[args.to](line) for line in lines]
+    values = [CASES[args.case](line) for line in lines]
     print(*values, sep='\n')
 
 

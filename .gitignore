@@ -2,6 +2,7 @@ dist/
 .idea/
 __pycache__/
 .task/
+tmp/
 .tox/
 .venv/
 

@@ -31,14 +31,14 @@ False
 'some_title_phrase'
 ```
 
-### CLI
+### Command line tool
 
 ```bash
-$ namecase --to=allcaps "hi there"
-# HI_THERE
-$ echo "hi_there\nsee you" | python -m namecase -t camel
-# hiThere
-# seeYou
+$ namecase --case allcaps "hi there"
+HI_THERE
+$ echo "hi_there\nsee you" | python -m namecase -c camel
+hiThere
+seeYou
 ```
 
 ### Supported cases

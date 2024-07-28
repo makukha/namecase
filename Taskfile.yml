@@ -49,6 +49,14 @@ tasks:
     cmds:
       - tox run --installpkg dist/namecase-{{.VERSION}}-py2.py3-none-any.whl
 
+  version:
+    desc: Update project version. Use task version -- patch|minor|major|...
+    vars:
+      OLD_VERSION: {sh: poetry version --short}
+    cmds:
+      - poetry version {{.CLI_ARGS}}
+      - sed -i '' -e "s|/namecase/{{.OLD_VERSION}}/|/namecase/$(poetry version --short)/|" README.md
+
   publish:
     desc: Publish package on PyPi.
     # NOTE: to actually publish, run the command without --dry-run

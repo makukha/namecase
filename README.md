@@ -1,6 +1,6 @@
 # namecase
 [![license](https://img.shields.io/github/license/makukha/namecase.svg)](https://github.com/makukha/namecase/blob/main/LICENSE)
-![Coverage Status](./docs/img/coverage-badge.svg)
+![Coverage Status](https://raw.githubusercontent.com/makukha/namecase/0.3.3/docs/img/coverage-badge.svg)
 [![pypi](https://img.shields.io/pypi/v/namecase.svg)](https://pypi.python.org/pypi/namecase)
 [![versions](https://img.shields.io/pypi/pyversions/namecase.svg)](https://github.com/pydantic/pydantic)
 

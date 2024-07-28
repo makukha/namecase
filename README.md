@@ -9,19 +9,16 @@ Small and clean, fully typed, zero dependency pure Python 2.7 to 3.13 and probab
 
 The package supports detection and conversion between cases: snake_case, camelCase, PascalCase, kebab-case, ALL_CAPS_CASE (aka SCREAMING_SNAKE_CASE), more to be added.
 
-All methods are cached for better performance.
-
 
 ## Usage
 
 ```doctest
->>> from namecase import Case
->>> text = Case('Some-Title phrase')
->>> isinstance(text, str)
-True
->>> text.is_snake()
+>>> from namecase import is_snake, to_snake
+
+>>> text = 'Some-Title phrase'
+>>> is_snake(text)
 False
->>> text.to_snake()
+>>> to_snake(text)
 'some_title_phrase'
 ```
 
@@ -37,48 +34,52 @@ $ echo "hi_there\nsee you" | python -m namecase -t camel
 
 ### Supported cases
 
+```doctest
+>>> text = 'Some-Title phrase'
+```
+
 #### snake_case
 ```doctest
->>> text = Case('Some-Title phrase')
->>> text.to_snake()
+>>> from namecase import is_snake, to_snake
+>>> to_snake(text)
 'some_title_phrase'
->>> text.to_snake().is_snake()
+>>> is_snake(to_snake(text))
 True
 ```
 
 #### camelCase
 ```doctest
->>> text = Case('Some-Title phrase')
->>> text.to_camel()
+>>> from namecase import is_camel, to_camel
+>>> to_camel(text)
 'someTitlePhrase'
->>> text.to_camel().is_camel()
+>>> is_camel(to_camel(text))
 True
 ```
 
 #### PascalCase
 ```doctest
->>> text = Case('Some-Title phrase')
->>> text.to_pascal()
+>>> from namecase import is_pascal, to_pascal
+>>> to_pascal(text)
 'SomeTitlePhrase'
->>> text.to_pascal().is_pascal()
+>>> is_pascal(to_pascal(text))
 True
 ```
 
 #### kebab-case
 ```doctest
->>> text = Case('Some-Title phrase')
->>> text.to_kebab()
+>>> from namecase import is_kebab, to_kebab
+>>> to_kebab(text)
 'some-title-phrase'
->>> text.to_kebab().is_kebab()
+>>> is_kebab(to_kebab(text))
 True
 ```
 
 #### ALL_CAPS_CASE
 ```doctest
->>> text = Case('Some-Title phrase')
->>> text.to_allcaps()
+>>> from namecase import is_allcaps, to_allcaps
+>>> to_allcaps(text)
 'SOME_TITLE_PHRASE'
->>> text.to_allcaps().is_allcaps()
+>>> is_allcaps(to_allcaps(text))
 True
 ```
 
@@ -87,8 +88,8 @@ True
 Phrase separators are non-word characters including underscore, and places where text case is changed from lower to upper. Digits are not treated as separators.
 
 ```doctest
->>> phrase = Case('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')
->>> phrase.words()
+>>> from namecase import words
+>>> words('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')
 'some,really,ME,Ssy,text,wit4,Digits,3Very,Wh3re'
 ```
 

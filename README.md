@@ -1,8 +1,8 @@
-# namecase
-[![license](https://img.shields.io/github/license/makukha/namecase.svg)](https://github.com/makukha/namecase/blob/main/LICENSE)
-![Coverage Status](https://raw.githubusercontent.com/makukha/namecase/0.3.3/docs/img/coverage-badge.svg)
-[![pypi](https://img.shields.io/pypi/v/namecase.svg)](https://pypi.python.org/pypi/namecase)
-[![versions](https://img.shields.io/pypi/pyversions/namecase.svg)](https://github.com/pydantic/pydantic)
+# caseutil
+[![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
+[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.3.3/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
+[![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
+[![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 
 **Naming case conventions parsing and converting tool.**
 
@@ -23,7 +23,7 @@ and more to be added.
 ## Usage
 
 ```doctest
->>> from namecase import is_snake, to_snake
+>>> from caseutil import is_snake, to_snake
 
 >>> text = 'Some-Title phrase'
 >>> is_snake(text)
@@ -35,9 +35,9 @@ False
 ### Command line tool
 
 ```bash
-$ namecase --case allcaps "hi there"
+$ caseutil --case allcaps "hi there"
 HI_THERE
-$ echo "hi_there\nsee you" | python -m namecase -c camel
+$ echo "hi_there\nsee you" | python -m caseutil -c camel
 hiThere
 seeYou
 ```
@@ -50,7 +50,7 @@ seeYou
 
 #### snake_case
 ```doctest
->>> from namecase import is_snake, to_snake
+>>> from caseutil import is_snake, to_snake
 >>> to_snake(text)
 'some_title_phrase'
 >>> is_snake(to_snake(text))
@@ -59,7 +59,7 @@ True
 
 #### camelCase
 ```doctest
->>> from namecase import is_camel, to_camel
+>>> from caseutil import is_camel, to_camel
 >>> to_camel(text)
 'someTitlePhrase'
 >>> is_camel(to_camel(text))
@@ -68,7 +68,7 @@ True
 
 #### PascalCase
 ```doctest
->>> from namecase import is_pascal, to_pascal
+>>> from caseutil import is_pascal, to_pascal
 >>> to_pascal(text)
 'SomeTitlePhrase'
 >>> is_pascal(to_pascal(text))
@@ -77,7 +77,7 @@ True
 
 #### kebab-case
 ```doctest
->>> from namecase import is_kebab, to_kebab
+>>> from caseutil import is_kebab, to_kebab
 >>> to_kebab(text)
 'some-title-phrase'
 >>> is_kebab(to_kebab(text))
@@ -86,7 +86,7 @@ True
 
 #### ALL_CAPS_CASE
 ```doctest
->>> from namecase import is_allcaps, to_allcaps
+>>> from caseutil import is_allcaps, to_allcaps
 >>> to_allcaps(text)
 'SOME_TITLE_PHRASE'
 >>> is_allcaps(to_allcaps(text))
@@ -95,7 +95,7 @@ True
 
 #### Title Case
 ```doctest
->>> from namecase import is_title, to_title
+>>> from caseutil import is_title, to_title
 >>> to_title(text)
 'Some Title Phrase'
 >>> is_title(to_title(text))
@@ -107,7 +107,7 @@ True
 Phrase separators are non-word characters including underscore, and places where text case is changed from lower to upper. Digits are not treated as separators.
 
 ```doctest
->>> from namecase import words
+>>> from caseutil import words
 >>> words('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')
 'some,really,ME,Ssy,text,wit4,Digits,3Very,Wh3re'
 ```
@@ -124,7 +124,7 @@ Only ASCII names are supported. Unicode support is planned.
 Requires Docker and Homebrew.
 
 ```bash
-git clone https://github.com/makukha/namecase.git
+git clone https://github.com/makukha/caseutil.git
 brew install go-task
 task init
 ```

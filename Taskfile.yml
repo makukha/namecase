@@ -8,8 +8,8 @@ tasks:
       - brew install poetry pyenv tox zlib
       - pyenv install --skip-existing $(pyenv local)
       - poetry env use $(pyenv prefix $(pyenv local))/bin/python
-      - task: init:python
       - task: install
+      - task: init:python
 
   init:python:
     internal: true
@@ -47,7 +47,7 @@ tasks:
     vars:
       VERSION: {sh: poetry version --short}
     cmds:
-      - tox run --installpkg dist/namecase-{{.VERSION}}-py2.py3-none-any.whl
+      - tox run --installpkg dist/caseutil-{{.VERSION}}-py2.py3-none-any.whl
 
   version:
     desc: Update project version. Use task version -- patch|minor|major|...
@@ -55,7 +55,7 @@ tasks:
       OLD_VERSION: {sh: poetry version --short}
     cmds:
       - poetry version {{.CLI_ARGS}}
-      - sed -i '' -e "s|/namecase/{{.OLD_VERSION}}/|/namecase/$(poetry version --short)/|" README.md
+      - sed -i '' -e "s|/caseutil/{{.OLD_VERSION}}/|/caseutil/$(poetry version --short)/|" README.md
 
   publish:
     desc: Publish package on PyPi.

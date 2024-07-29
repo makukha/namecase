@@ -103,7 +103,7 @@ CASES = {
 
 # cli
 
-parser = ArgumentParser(prog='namecase', description=__doc__)
+parser = ArgumentParser(prog='caseutil', description=__doc__)
 parser.add_argument('text', default=sys.stdin, nargs='?')
 parser.add_argument('-c', '--case', choices=CASES.keys(), required=True)
 

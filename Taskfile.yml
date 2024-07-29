@@ -59,6 +59,5 @@ tasks:
 
   publish:
     desc: Publish package on PyPi.
-    # NOTE: to actually publish, run the command without --dry-run
     cmds:
-      - poetry publish --dry-run
+      - poetry publish

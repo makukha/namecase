@@ -1,0 +1,42 @@
+>>> from caseutil import *
+>>> text = 'My variable-name'
+
+>>> to_allcaps(text)
+'MY_VARIABLE_NAME'
+>>> not is_allcaps(text) and is_allcaps(to_allcaps(text))
+True
+
+>>> to_camel(text)
+'myVariableName'
+>>> not is_camel(text) and is_camel(to_camel(text))
+True
+
+>>> to_kebab(text)
+'my-variable-name'
+>>> not is_kebab(text) and is_kebab(to_kebab(text))
+True
+
+>>> to_lower(text)
+'my variable name'
+>>> not is_lower(text) and is_lower(to_lower(text))
+True
+
+>>> to_pascal(text)
+'MyVariableName'
+>>> not is_pascal(text) and is_pascal(to_pascal(text))
+True
+
+>>> to_snake(text)
+'my_variable_name'
+>>> not is_snake(text) and is_snake(to_snake(text))
+True
+
+>>> to_title(text)
+'My Variable Name'
+>>> not is_title(text) and is_title(to_title(text))
+True
+
+>>> to_upper(text)
+'MY VARIABLE NAME'
+>>> not is_upper(text) and is_upper(to_upper(text))
+True

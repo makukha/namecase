@@ -1,125 +1,120 @@
 # caseutil
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
-[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.4.0/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
+[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.0/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 
-**Naming case conventions parsing and converting tool.**
-
-Small and clean, fully typed, zero dependency pure Python 2.7 to 3.13 and probably above.
-
-The package supports detection and conversion between cases:
-
-* snake_case
-* camelCase
-* PascalCase
-* kebab-case
-* ALL_CAPS_CASE (aka SCREAMING_SNAKE_CASE)
-* Title Case
-
-and more to be added.
+**Case conversion and verification Python library for snake_case, camelCase, kebab-case and more.**
 
 
-## Usage
+## Features
 
-```doctest
->>> from caseutil import is_snake, to_snake
+* Verify and convert between most popular cases
+* Custom separators: `'my.variable.name'`, `'my/variable/name'`
+* Command line mode: `caseutil`
+* Pure Python 2.7 to 3.13+
+* No dependencies
+* 100% test coverage
 
->>> text = 'Some-Title phrase'
->>> is_snake(text)
-False
->>> to_snake(text)
-'some_title_phrase'
-```
 
-### Command line tool
+## Supported Cases
+
+| case name                 | example          | func         |
+|---------------------------|------------------|--------------|
+| Snake case                | my_variable_name | `to_snake`   |
+| All caps, screaming snake | MY_VARIABLE_NAME | `to_allcaps` |
+| Camel case                | myVariableName   | `to_camel`   |
+| Pascal case               | MyVariableName   | `to_pascal`  |
+| Kebab case, spinal case   | my-variable-name | `to_kebab`   |
+| Lower space-separated     | my variable name | `to_lower`   |
+| Upper space-separated     | MY VARIABLE NAME | `to_upper`   |
+| Title space-separated     | My Variable Name | `to_title`   |
+
+
+## Installation
 
 ```bash
-$ caseutil --case allcaps "hi there"
+$ pip install caseutil
+```
+
+## Quick Start
+
+Call `is_*` to verify case format, and `to_*` to convert to specific case:
+
+```doctest
+>>> from caseutil import *
+>>> is_snake('My variable-name')
+False
+>>> to_snake('My variable-name')
+'my_variable_name'
+```
+
+Use as command line tool, pass multiple values in argument or stdin:
+
+```bash
+$ caseutil -c allcaps "hi there"
 HI_THERE
 $ echo "hi_there\nsee you" | python -m caseutil -c camel
 hiThere
 seeYou
 ```
 
-### Supported cases
 
-```doctest
->>> text = 'Some-Title phrase'
-```
+## Universal Functions
 
-#### snake_case
+Use functions `is_case()` and `to_case()` to deal with arbitrary case:
 ```doctest
->>> from caseutil import is_snake, to_snake
->>> to_snake(text)
-'some_title_phrase'
->>> is_snake(to_snake(text))
+>>> is_case('camel', 'myVariableName')
 True
+>>> to_case(Case.ALLCAPS, 'myVariableName')
+'MY_VARIABLE_NAME'
 ```
 
-#### camelCase
-```doctest
->>> from caseutil import is_camel, to_camel
->>> to_camel(text)
-'someTitlePhrase'
->>> is_camel(to_camel(text))
-True
-```
+All supported cases are gathered in `Case` string enum:
 
-#### PascalCase
-```doctest
->>> from caseutil import is_pascal, to_pascal
->>> to_pascal(text)
-'SomeTitlePhrase'
->>> is_pascal(to_pascal(text))
-True
-```
+| enum           | value       |
+|----------------|-------------|
+| `Case.ALLCAPS` | `'allcaps'` |
+| `Case.CAMEL`   | `'camel'`   |
+| `Case.KEBAB`   | `'kebab'`   |
+| `Case.LOWER`   | `lower`     |
+| `Case.PASCAL`  | `'pascal'`  |
+| `Case.SNAKE`   | `'snake'`   |
+| `Case.TITLE`   | `'title'`   |
+| `Case.UPPER`   | `'upper'`   |
 
-#### kebab-case
-```doctest
->>> from caseutil import is_kebab, to_kebab
->>> to_kebab(text)
-'some-title-phrase'
->>> is_kebab(to_kebab(text))
-True
-```
 
-#### ALL_CAPS_CASE
-```doctest
->>> from caseutil import is_allcaps, to_allcaps
->>> to_allcaps(text)
-'SOME_TITLE_PHRASE'
->>> is_allcaps(to_allcaps(text))
-True
-```
+## Tokenization
 
-#### Title Case
-```doctest
->>> from caseutil import is_title, to_title
->>> to_title(text)
-'Some Title Phrase'
->>> is_title(to_title(text))
-True
-```
-
-### Separators
-
-Phrase separators are non-word characters including underscore, and places where text case is changed from lower to upper. Digits are not treated as separators.
+Word separators are non-word characters including underscore, and places where text case is changed from lower to upper. Digits are not treated as separators. For more details, see this example and unit tests.
 
 ```doctest
->>> from caseutil import words
 >>> words('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')
-'some,really,ME,Ssy,text,wit4,Digits,3Very,Wh3re'
+['some', 'really', 'ME', 'Ssy', 'text', 'wit4', 'Digits', '3Very', 'Wh3re']
 ```
 
-### Unicode
+## Custom Separators
+
+For custom separators, use `words()` function:
+```doctest
+>>> '/'.join(words(to_lower('myVariableName')))
+'my/variable/name'
+>>> '.'.join(words('myVariableName'))
+'my.Variable.Name'
+```
+
+
+## Unicode
 
 Only ASCII names are supported. Unicode support is planned.
 
 
-## Development
+---
 
-### Mac OS X
+
+## 🛠 Developer's Corner
+
+### Develop on Mac OS X
 
 Requires Docker and Homebrew.
 
@@ -135,7 +130,7 @@ Testing:
 task test
 ```
 
-## Plans
+### Plans
 
 * Add more test, explore edge cases
 * Add Unicode support (write tests)

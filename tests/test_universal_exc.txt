@@ -1,0 +1,13 @@
+>>> from caseutil import is_case, to_case
+
+Invalid cases raise ValueError:
+
+>>> is_case('unsupported', 'any text')
+Traceback (most recent call last):
+    ...
+ValueError: Unsupported case: unsupported
+
+>>> to_case('unsupported', 'any text')
+Traceback (most recent call last):
+    ...
+ValueError: Unsupported case: unsupported

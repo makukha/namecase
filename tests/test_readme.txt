@@ -1,50 +1,19 @@
->>> from caseutil import is_snake, to_snake
-
->>> text = 'Some-Title phrase'
->>> is_snake(text)
+>>> from caseutil import *
+>>> is_snake('My variable-name')
 False
->>> to_snake(text)
-'some_title_phrase'
+>>> to_snake('My variable-name')
+'my_variable_name'
 
->>> text = 'Some-Title phrase'
-
->>> from caseutil import is_snake, to_snake
->>> to_snake(text)
-'some_title_phrase'
->>> is_snake(to_snake(text))
+>>> is_case('camel', 'myVariableName')
 True
+>>> to_case(Case.ALLCAPS, 'myVariableName')
+'MY_VARIABLE_NAME'
 
->>> from caseutil import is_camel, to_camel
->>> to_camel(text)
-'someTitlePhrase'
->>> is_camel(to_camel(text))
-True
-
->>> from caseutil import is_pascal, to_pascal
->>> to_pascal(text)
-'SomeTitlePhrase'
->>> is_pascal(to_pascal(text))
-True
-
->>> from caseutil import is_kebab, to_kebab
->>> to_kebab(text)
-'some-title-phrase'
->>> is_kebab(to_kebab(text))
-True
-
->>> from caseutil import is_allcaps, to_allcaps
->>> to_allcaps(text)
-'SOME_TITLE_PHRASE'
->>> is_allcaps(to_allcaps(text))
-True
-
->>> from caseutil import is_title, to_title
->>> to_title(text)
-'Some Title Phrase'
->>> is_title(to_title(text))
-True
-
->>> from caseutil import words
 >>> words('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')
-'some,really,ME,Ssy,text,wit4,Digits,3Very,Wh3re'
+['some', 'really', 'ME', 'Ssy', 'text', 'wit4', 'Digits', '3Very', 'Wh3re']
+
+>>> '/'.join(words(to_lower('myVariableName')))
+'my/variable/name'
+>>> '.'.join(words('myVariableName'))
+'my.Variable.Name'
 

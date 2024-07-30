@@ -1,0 +1,34 @@
+>>> from subprocess import check_output
+>>> sample = 'My variable-name'
+
+Test all case conversions:
+
+>>> check_output(['caseutil', '-c', 'allcaps', sample])
+b'MY_VARIABLE_NAME\n'
+>>> check_output(['caseutil', '-c', 'camel', sample])
+b'myVariableName\n'
+>>> check_output(['caseutil', '-c', 'kebab', sample])
+b'my-variable-name\n'
+>>> check_output(['caseutil', '-c', 'lower', sample])
+b'my variable name\n'
+>>> check_output(['caseutil', '-c', 'pascal', sample])
+b'MyVariableName\n'
+>>> check_output(['caseutil', '-c', 'snake', sample])
+b'my_variable_name\n'
+>>> check_output(['caseutil', '-c', 'title', sample])
+b'My Variable Name\n'
+>>> check_output(['caseutil', '-c', 'upper', sample])
+b'MY VARIABLE NAME\n'
+
+Test multiline input:
+
+>>> multisample = 'some phrase 1\n somePhrase2'
+>>> check_output(['caseutil', '-c', 'allcaps', multisample])
+b'SOME_PHRASE_1\nSOME_PHRASE2\n'
+>>> check_output(f'echo "{multisample}" | caseutil -c allcaps', shell=True)
+b'SOME_PHRASE_1\nSOME_PHRASE2\n'
+
+Test module call:
+
+>>> check_output(['python', '-m', 'caseutil', '-c', 'allcaps', sample])
+b'MY_VARIABLE_NAME\n'

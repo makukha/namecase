@@ -173,8 +173,9 @@ def to_case(case: Case | str, text: str) -> str:
 # cli
 
 parser = ArgumentParser(prog='caseutil', description=__doc__)
+parser.add_argument('-v', '--version', action='version', version=__version__)
+parser.add_argument('-c', choices=CASES, required=True)
 parser.add_argument('text', default=sys.stdin, nargs='?')
-parser.add_argument('-c', '--case', choices=CASES, required=True)
 
 
 def main() -> None:
@@ -184,7 +185,7 @@ def main() -> None:
         if isinstance(args.text, TextIOBase)
         else args.text.splitlines()
     )
-    values = [to_case(args.case, line) for line in lines]
+    values = [to_case(args.c, line) for line in lines]
     print(*values, sep='\n')
 
 

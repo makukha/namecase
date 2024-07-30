@@ -1,8 +1,8 @@
 >>> from subprocess import check_output
->>> sample = 'My variable-name'
 
 Test all case conversions:
 
+>>> sample = 'My variable-name'
 >>> check_output(['caseutil', '-c', 'allcaps', sample])
 b'MY_VARIABLE_NAME\n'
 >>> check_output(['caseutil', '-c', 'camel', sample])
@@ -32,3 +32,10 @@ Test module call:
 
 >>> check_output(['python', '-m', 'caseutil', '-c', 'allcaps', sample])
 b'MY_VARIABLE_NAME\n'
+
+Test --version option:
+
+>>> import caseutil
+>>> out = check_output(['caseutil', '--version'])
+>>> out.decode('ascii').strip() == caseutil.__version__
+True

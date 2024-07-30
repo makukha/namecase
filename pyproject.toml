@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "caseutil"
-version = "0.5.1"
-description = "Naming case conventions parsing and converting tool."
+version = "0.5.2"
+description = "Case conversion and verification Python library for snake_case, camelCase, kebab-case, and more."
 authors = ["Michael Makukha <m.makukha@gmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -10,6 +10,10 @@ repository = "https://github.com/makukha/caseutil"
 keywords = [
     "case",
     "convert",
+    "case converter",
+    "string case",
+    "text case",
+    "text case converter",
     "naming",
     "camel case",
     "pascal case",
@@ -17,7 +21,6 @@ keywords = [
     "kebab case",
     "all caps",
     "screaming snake case",
-    # todo
 ]
 classifiers = [
     # see https://pypi.org/classifiers/

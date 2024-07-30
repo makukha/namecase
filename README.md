@@ -1,6 +1,6 @@
 # caseutil
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
-[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.1/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
+[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.2/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 

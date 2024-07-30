@@ -1,0 +1,14 @@
+[tool.bumpversion]
+current_version = "0.5.3"
+allow_dirty = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+
+[[tool.bumpversion.files]]
+filename = "src/caseutil.py"
+
+[[tool.bumpversion.files]]
+filename = "README.md"
+search = "/{current_version}/"
+replace = "/{new_version}/"

@@ -1,6 +1,6 @@
 # caseutil
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
-[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.0/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
+[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.1/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 
@@ -19,16 +19,16 @@
 
 ## Supported Cases
 
-| case name                 | example          | func         |
-|---------------------------|------------------|--------------|
-| Snake case                | my_variable_name | `to_snake`   |
-| All caps, screaming snake | MY_VARIABLE_NAME | `to_allcaps` |
-| Camel case                | myVariableName   | `to_camel`   |
-| Pascal case               | MyVariableName   | `to_pascal`  |
-| Kebab case, spinal case   | my-variable-name | `to_kebab`   |
-| Lower space-separated     | my variable name | `to_lower`   |
-| Upper space-separated     | MY VARIABLE NAME | `to_upper`   |
-| Title space-separated     | My Variable Name | `to_title`   |
+| case name                 | func         | example          |
+|---------------------------|--------------|------------------|
+| Snake case                | `to_snake`   | my_variable_name |
+| All caps, screaming snake | `to_allcaps` | MY_VARIABLE_NAME |
+| Camel case                | `to_camel`   | myVariableName   |
+| Pascal case               | `to_pascal`  | MyVariableName   |
+| Kebab case, spinal case   | `to_kebab`   | my-variable-name |
+| Lower space-separated     | `to_lower`   | my variable name |
+| Upper space-separated     | `to_upper`   | MY VARIABLE NAME |
+| Title space-separated     | `to_title`   | My Variable Name |
 
 
 ## Installation
@@ -40,7 +40,6 @@ $ pip install caseutil
 ## Quick Start
 
 Call `is_*` to verify case format, and `to_*` to convert to specific case:
-
 ```doctest
 >>> from caseutil import *
 >>> is_snake('My variable-name')
@@ -50,7 +49,6 @@ False
 ```
 
 Use as command line tool, pass multiple values in argument or stdin:
-
 ```bash
 $ caseutil -c allcaps "hi there"
 HI_THERE
@@ -70,18 +68,18 @@ True
 'MY_VARIABLE_NAME'
 ```
 
-All supported cases are gathered in `Case` string enum:
-
-| enum           | value       |
-|----------------|-------------|
-| `Case.ALLCAPS` | `'allcaps'` |
-| `Case.CAMEL`   | `'camel'`   |
-| `Case.KEBAB`   | `'kebab'`   |
-| `Case.LOWER`   | `lower`     |
-| `Case.PASCAL`  | `'pascal'`  |
-| `Case.SNAKE`   | `'snake'`   |
-| `Case.TITLE`   | `'title'`   |
-| `Case.UPPER`   | `'upper'`   |
+All supported cases are gathered in `Case` enum:
+```python
+class Case(StrEnum):
+    ALLCAPS = 'allcaps'
+    CAMEL = 'camel'
+    KEBAB = 'kebab'
+    LOWER = 'lower'
+    PASCAL = 'pascal'
+    SNAKE = 'snake'
+    TITLE = 'title'
+    UPPER = 'upper'
+```
 
 
 ## Tokenization

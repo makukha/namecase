@@ -50,12 +50,9 @@ tasks:
       - tox run --installpkg dist/caseutil-{{.VERSION}}-py2.py3-none-any.whl
 
   version:
-    desc: Update project version. Use task version -- patch|minor|major|...
-    vars:
-      OLD_VERSION: {sh: poetry version --short}
+    desc: Bump project version. Use task version -- patch|minor|major|...
     cmds:
-      - poetry version {{.CLI_ARGS}}
-      - sed -i '' -e "s|/caseutil/{{.OLD_VERSION}}/|/caseutil/$(poetry version --short)/|" README.md
+      - poetry run bump-my-version bump {{.CLI_ARGS}}
 
   publish:
     desc: Publish package on PyPi.

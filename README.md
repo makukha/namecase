@@ -4,7 +4,7 @@
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 
-**Case conversion and verification Python library for snake_case, camelCase, kebab-case, and more.**
+Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 
 
 ## Features

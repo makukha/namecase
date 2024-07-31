@@ -1,14 +1,14 @@
 >>> from caseutil import *
 >>> text = 'My variable-name'
 
->>> to_allcaps(text)
-'MY_VARIABLE_NAME'
->>> not is_allcaps(text) and is_allcaps(to_allcaps(text))
-True
-
 >>> to_camel(text)
 'myVariableName'
 >>> not is_camel(text) and is_camel(to_camel(text))
+True
+
+>>> to_const(text)
+'MY_VARIABLE_NAME'
+>>> not is_const(text) and is_const(to_const(text))
 True
 
 >>> to_kebab(text)

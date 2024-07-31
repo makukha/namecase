@@ -3,10 +3,10 @@
 Test all case conversions:
 
 >>> sample = 'My variable-name'
->>> check_output(['caseutil', '-c', 'allcaps', sample])
-b'MY_VARIABLE_NAME\n'
 >>> check_output(['caseutil', '-c', 'camel', sample])
 b'myVariableName\n'
+>>> check_output(['caseutil', '-c', 'const', sample])
+b'MY_VARIABLE_NAME\n'
 >>> check_output(['caseutil', '-c', 'kebab', sample])
 b'my-variable-name\n'
 >>> check_output(['caseutil', '-c', 'lower', sample])
@@ -23,14 +23,14 @@ b'MY VARIABLE NAME\n'
 Test multiline input:
 
 >>> multisample = 'some phrase 1\n somePhrase2'
->>> check_output(['caseutil', '-c', 'allcaps', multisample])
+>>> check_output(['caseutil', '-c', 'const', multisample])
 b'SOME_PHRASE_1\nSOME_PHRASE2\n'
->>> check_output(f'echo "{multisample}" | caseutil -c allcaps', shell=True)
+>>> check_output(f'echo "{multisample}" | caseutil -c const', shell=True)
 b'SOME_PHRASE_1\nSOME_PHRASE2\n'
 
 Test module call:
 
->>> check_output(['python', '-m', 'caseutil', '-c', 'allcaps', sample])
+>>> check_output(['python', '-m', 'caseutil', '-c', 'const', sample])
 b'MY_VARIABLE_NAME\n'
 
 Test --version option:

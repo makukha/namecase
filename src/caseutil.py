@@ -9,8 +9,8 @@ import re
 import sys
 
 __all__ = [
-    'is_allcaps', 'to_allcaps',
     'is_camel', 'to_camel',
+    'is_const', 'to_const',
     'is_kebab', 'to_kebab',
     'is_lower', 'to_lower',
     'is_pascal', 'to_pascal',
@@ -30,8 +30,8 @@ else:
     parents = (str, Enum)
 
 class Case(*parents):
-    ALLCAPS = 'allcaps'
     CAMEL = 'camel'
+    CONST = 'const'
     KEBAB = 'kebab'
     LOWER = 'lower'
     PASCAL = 'pascal'
@@ -52,8 +52,8 @@ UPPER = r'(?:[A-Z0-9]+)'
 LOWER = r'(?:[a-z0-9]+)'
 TITLE = rf'(?:[0-9]*[A-Z]{LOWER}?)'
 
-RX_ALLCAPS = re.compile(f'{UPPER}(_{UPPER})*')
 RX_CAMEL = re.compile(f'{LOWER}{TITLE}*')
+RX_CONST = re.compile(f'{UPPER}(_{UPPER})*')
 RX_KEBAB = re.compile(f'{LOWER}(-{LOWER})*')
 RX_LOWER = re.compile(f'{LOWER}( {LOWER})*')
 RX_PASCAL = re.compile(f'{TITLE}+')
@@ -78,12 +78,12 @@ def words(text: str) -> list[str]:
     return tokenize(text).split(',')
 
 
-# all caps case
+# const case
 
-def is_allcaps(text: str) -> bool:
-    return True if RX_ALLCAPS.fullmatch(text) else False
+def is_const(text: str) -> bool:
+    return True if RX_CONST.fullmatch(text) else False
 
-def to_allcaps(text: str) -> str:
+def to_const(text: str) -> str:
     return tokenize(text).upper().replace(',', '_')
 
 # camel case
@@ -147,8 +147,8 @@ def to_upper(text: str) -> str:
 # universal functions
 
 def is_case(case: Case | str, text: str) -> bool:
-    if case == Case.ALLCAPS: return is_allcaps(text)
-    elif case == Case.CAMEL: return is_camel(text)
+    if case == Case.CAMEL: return is_camel(text)
+    elif case == Case.CONST: return is_const(text)
     elif case == Case.KEBAB: return is_kebab(text)
     elif case == Case.LOWER: return is_lower(text)
     elif case == Case.PASCAL: return is_pascal(text)
@@ -159,8 +159,8 @@ def is_case(case: Case | str, text: str) -> bool:
 
 
 def to_case(case: Case | str, text: str) -> str:
-    if case == Case.ALLCAPS: return to_allcaps(text)
-    elif case == Case.CAMEL: return to_camel(text)
+    if case == Case.CAMEL: return to_camel(text)
+    elif case == Case.CONST: return to_const(text)
     elif case == Case.KEBAB: return to_kebab(text)
     elif case == Case.LOWER: return to_lower(text)
     elif case == Case.PASCAL: return to_pascal(text)

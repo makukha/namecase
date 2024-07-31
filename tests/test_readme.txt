@@ -1,12 +1,14 @@
 >>> from caseutil import *
+
 >>> is_snake('My variable-name')
 False
+
 >>> to_snake('My variable-name')
 'my_variable_name'
 
 >>> is_case('camel', 'myVariableName')
 True
->>> to_case(Case.ALLCAPS, 'myVariableName')
+>>> to_case(Case.CONST, 'myVariableName')
 'MY_VARIABLE_NAME'
 
 >>> words('!some_reallyMESsy text--wit4Digits.3VeryWh3re--')

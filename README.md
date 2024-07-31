@@ -1,6 +1,7 @@
 # caseutil ⇄ 🐍🐫🍢
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
-[![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.3/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
+[![Tests](https://raw.githubusercontent.com/makukha/caseutil/0.5.3/docs/badge/tests.svg)](https://github.com/makukha/caseutil)
+[![Coverage](https://raw.githubusercontent.com/makukha/caseutil/0.5.3/docs/badge/coverage.svg)](https://github.com/makukha/caseutil)
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 

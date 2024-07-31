@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "caseutil"
-version = "0.5.3"
+version = "0.6.0"
 description = "Case convert and verify for Python: snake_case, camelCase, kebab-case, and more."
 authors = ["Michael Makukha <m.makukha@gmail.com>"]
 license = "MIT"

@@ -1,4 +1,4 @@
-# caseutil
+# caseutil ⇄ 🐍🐫🍢
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
 [![Coverage Status](https://raw.githubusercontent.com/makukha/caseutil/0.5.3/docs/img/coverage-badge.svg)](https://github.com/makukha/caseutil)
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
@@ -19,16 +19,16 @@ Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 
 ## Supported Cases
 
-| case name                 | func         | example          |
-|---------------------------|--------------|------------------|
-| Snake case                | `to_snake`   | my_variable_name |
-| All caps, screaming snake | `to_allcaps` | MY_VARIABLE_NAME |
-| Camel case                | `to_camel`   | myVariableName   |
-| Pascal case               | `to_pascal`  | MyVariableName   |
-| Kebab case, spinal case   | `to_kebab`   | my-variable-name |
-| Lower space-separated     | `to_lower`   | my variable name |
-| Upper space-separated     | `to_upper`   | MY VARIABLE NAME |
-| Title space-separated     | `to_title`   | My Variable Name |
+| case name   | example          | functions                |
+|-------------|------------------|--------------------------|
+| snake_case  | my_variable_name | `is_snake`, `to_snake`   |
+| CONST_CASE  | MY_VARIABLE_NAME | `is_const`, `to_const`   |
+| camelCase   | myVariableName   | `is_camel`, `to_camel`   |
+| PascalCase  | MyVariableName   | `is_pascal`, `to_pascal` |
+| kebab-case  | my-variable-name | `is_kebab`, `to_kebab`   |
+| lower space | my variable name | `is_lower`, `to_lower`   |
+| UPPER SPACE | MY VARIABLE NAME | `is_upper`, `to_upper`   |
+| Title Space | My Variable Name | `is_title`, `to_title`   |
 
 
 ## Installation
@@ -39,18 +39,25 @@ $ pip install caseutil
 
 ## Quick Start
 
-Call `is_*` to verify case format, and `to_*` to convert to specific case:
 ```doctest
 >>> from caseutil import *
+```
+
+Verify case format:
+```doctest
 >>> is_snake('My variable-name')
 False
+```
+
+Convert to case:
+```doctest
 >>> to_snake('My variable-name')
 'my_variable_name'
 ```
 
-Use as command line tool, pass multiple values in argument or stdin:
+Use as command line tool, supports multiple values in argument or stdin:
 ```bash
-$ caseutil -c allcaps "hi there"
+$ caseutil -c const "hi there"
 HI_THERE
 $ echo "hi_there\nsee you" | python -m caseutil -c camel
 hiThere
@@ -64,15 +71,15 @@ Use functions `is_case()` and `to_case()` to deal with arbitrary case:
 ```doctest
 >>> is_case('camel', 'myVariableName')
 True
->>> to_case(Case.ALLCAPS, 'myVariableName')
+>>> to_case(Case.CONST, 'myVariableName')
 'MY_VARIABLE_NAME'
 ```
 
 All supported cases are gathered in `Case` enum:
 ```python
 class Case(StrEnum):
-    ALLCAPS = 'allcaps'
     CAMEL = 'camel'
+    CONST = 'const'
     KEBAB = 'kebab'
     LOWER = 'lower'
     PASCAL = 'pascal'
@@ -107,12 +114,9 @@ For custom separators, use `words()` function:
 Only ASCII names are supported. Unicode support is planned.
 
 
----
+## Developer's Corner
 
-
-## 🛠 Developer's Corner
-
-### Develop on Mac OS X
+### On Mac OS X
 
 Requires Docker and Homebrew.
 
@@ -122,7 +126,9 @@ brew install go-task
 task init
 ```
 
-Testing:
+### Testing
+
+Tox for all supported Python versions and coverage included.
 
 ```bash
 task test

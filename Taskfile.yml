@@ -51,6 +51,5 @@ tasks:
 
   publish:
     desc: Publish package on PyPi.
-    deps: [test]
     cmds:
       - pdm publish

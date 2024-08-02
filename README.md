@@ -1,7 +1,7 @@
 # caseutil ⇄ 🐍🐫🍢
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
-[![Tests](https://raw.githubusercontent.com/makukha/caseutil/0.6.0/docs/badge/tests.svg)](https://github.com/makukha/caseutil)
-[![Coverage](https://raw.githubusercontent.com/makukha/caseutil/0.6.0/docs/badge/coverage.svg)](https://github.com/makukha/caseutil)
+[![Tests](https://raw.githubusercontent.com/makukha/caseutil/0.6.1/docs/badge/tests.svg)](https://github.com/makukha/caseutil)
+[![Coverage](https://raw.githubusercontent.com/makukha/caseutil/0.6.1/docs/badge/coverage.svg)](https://github.com/makukha/caseutil)
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
 
@@ -20,7 +20,7 @@ Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 
 ## Supported Cases
 
-| case name   | example          | functions                |
+| Case        | Example          | Functions                |
 |-------------|------------------|--------------------------|
 | snake_case  | my_variable_name | `is_snake`, `to_snake`   |
 | CONST_CASE  | MY_VARIABLE_NAME | `is_const`, `to_const`   |
@@ -115,25 +115,29 @@ For custom separators, use `words()` function:
 Only ASCII names are supported. Unicode support is planned.
 
 
-## Developer's Corner
+## Developer Notes
 
-### On Mac OS X
+### Mac OS X
 
-Requires Docker and Homebrew.
+This project requires [Homebrew](https://brew.sh). Other tools like [PDM](https://pdm-project.org), [Tox](https://tox.wiki), and even [Alacritty](https://alacritty.org), will be installed automatically.
 
 ```bash
 git clone https://github.com/makukha/caseutil.git
-brew install go-task
-task init
+cd caseutil
+brew bundle
+task init install
 ```
 
-### Testing
+### Operations
 
-Tox for all supported Python versions and coverage included.
+| Command        | Description                   |
+|----------------|-------------------------------|
+| `task init`    | Initialize system environment |
+| `task install` | Install Python environment    |
+| `task test`    | Run tests                     |
+| `task version` | Bump project version          |
+| `task publish` | Publish package on PyPi       |
 
-```bash
-task test
-```
 
 ### Plans
 

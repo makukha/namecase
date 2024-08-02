@@ -135,8 +135,6 @@ task init install
 | `task init`    | Initialize system environment |
 | `task install` | Install Python environment    |
 | `task test`    | Run tests                     |
-| `task version` | Bump project version          |
-| `task publish` | Publish package on PyPi       |
 
 
 ### Plans

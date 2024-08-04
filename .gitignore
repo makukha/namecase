@@ -1,5 +1,6 @@
 dist/
 .idea/
+.pdm-build/
 .pdm-python
 __pycache__/
 .task/

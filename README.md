@@ -117,7 +117,7 @@ Only ASCII names are supported. Unicode support is planned.
 
 ## Developer Notes
 
-### Mac OS X
+### OS X
 
 This project requires [Homebrew](https://brew.sh). Other tools like [PDM](https://pdm-project.org), [Tox](https://tox.wiki), and even [Alacritty](https://alacritty.org), will be installed automatically.
 

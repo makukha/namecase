@@ -1,5 +1,8 @@
 version: '3'
 
+vars:
+  GET_PYTHON_VERSIONS: tox --listenvs | sed -e 's/^py//' | xargs echo
+
 tasks:
 
   init:
@@ -14,12 +17,10 @@ tasks:
     sources:
       - tox.ini
     vars:
-      VERSIONS:
-        sh: >
-          sed -ne '/^env_list/ s/^.*{\(.*\)}.*/\1/; s/,/ /gp' < tox.ini
+      PYTHON_VERSIONS: {sh: '{{.GET_PYTHON_VERSIONS}}'}
     cmds:
       - cmd: pyenv install --skip-existing {{.ITEM}}
-        for: {var: VERSIONS}
+        for: {var: PYTHON_VERSIONS}
 
   install:
     desc: Install dev python environment.
@@ -53,3 +54,14 @@ tasks:
     desc: Publish package on PyPi.
     cmds:
       - pdm publish
+
+  check:python-versions:
+    desc: Check python versions available to pyenv.
+    vars:
+      PYTHON_VERSIONS: {sh: '{{.GET_PYTHON_VERSIONS}}'}
+    cmds:
+      - brew upgrade --quiet pyenv
+      - cmd: echo {{.ITEM}}; pyenv install --list | grep " $(echo {{.ITEM}} | cut -d. -f1-2)" | tac
+        for: {var: PYTHON_VERSIONS}
+        silent: true
+

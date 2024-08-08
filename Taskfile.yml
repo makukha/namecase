@@ -59,6 +59,8 @@ tasks:
 
   publish:
     desc: Publish package on PyPi.
+    preconditions:
+      - test $(git rev-parse --abbrev-ref HEAD) = main
     cmds:
       - pdm publish
 

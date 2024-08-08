@@ -1,6 +1,7 @@
 version: '3'
 
 vars:
+  GITHUB_REPO: makukha/caseutil
   GET_PYTHON_VERSIONS: tox --listenvs | sed -e 's/^py//' | xargs echo
 
 tasks:
@@ -76,3 +77,11 @@ tasks:
         for: {var: PYTHON_VERSIONS}
         silent: true
 
+  docs:scorecard:
+    desc: Update security scorecard
+    vars:
+      GITHUB_TOKEN: {sh: keyring get token.github.caseutil scorecard}
+    env:
+      GITHUB_TOKEN: '{{.GITHUB_TOKEN}}'
+    cmds:
+      - scorecard --repo={{.GITHUB_REPO}}

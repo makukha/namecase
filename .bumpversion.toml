@@ -1,5 +1,5 @@
 [tool.bumpversion]
-current_version = "0.6.3"
+current_version = "0.6.4"
 allow_dirty = true
 
 [[tool.bumpversion.files]]
@@ -7,5 +7,3 @@ filename = "src/caseutil.py"
 
 [[tool.bumpversion.files]]
 filename = "README.md"
-search = "/{current_version}/"
-replace = "/{new_version}/"

@@ -1,7 +1,7 @@
 """
 Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 """
-__version__ = '0.6.2'
+__version__ = '0.6.3'
 
 from argparse import ArgumentParser
 from io import TextIOBase

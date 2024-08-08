@@ -147,27 +147,27 @@ def to_upper(text: str) -> str:
 # universal functions
 
 def is_case(case: Case | str, text: str) -> bool:
-    if case == Case.CAMEL: return is_camel(text)
-    elif case == Case.CONST: return is_const(text)
-    elif case == Case.KEBAB: return is_kebab(text)
-    elif case == Case.LOWER: return is_lower(text)
-    elif case == Case.PASCAL: return is_pascal(text)
-    elif case == Case.SNAKE: return is_snake(text)
-    elif case == Case.TITLE: return is_title(text)
-    elif case == Case.UPPER: return is_upper(text)
-    else: raise ValueError(f'Unsupported case: {case}')
+    if case == Case.CAMEL: return is_camel(text)  # noqa: E701
+    elif case == Case.CONST: return is_const(text)  # noqa: E701
+    elif case == Case.KEBAB: return is_kebab(text)  # noqa: E701
+    elif case == Case.LOWER: return is_lower(text)  # noqa: E701
+    elif case == Case.PASCAL: return is_pascal(text)  # noqa: E701
+    elif case == Case.SNAKE: return is_snake(text)  # noqa: E701
+    elif case == Case.TITLE: return is_title(text)  # noqa: E701
+    elif case == Case.UPPER: return is_upper(text)  # noqa: E701
+    else: raise ValueError(f'Unsupported case: {case}')  # noqa: E701
 
 
 def to_case(case: Case | str, text: str) -> str:
-    if case == Case.CAMEL: return to_camel(text)
-    elif case == Case.CONST: return to_const(text)
-    elif case == Case.KEBAB: return to_kebab(text)
-    elif case == Case.LOWER: return to_lower(text)
-    elif case == Case.PASCAL: return to_pascal(text)
-    elif case == Case.SNAKE: return to_snake(text)
-    elif case == Case.TITLE: return to_title(text)
-    elif case == Case.UPPER: return to_upper(text)
-    else: raise ValueError(f'Unsupported case: {case}')
+    if case == Case.CAMEL: return to_camel(text)  # noqa: E701
+    elif case == Case.CONST: return to_const(text)  # noqa: E701
+    elif case == Case.KEBAB: return to_kebab(text)  # noqa: E701
+    elif case == Case.LOWER: return to_lower(text)  # noqa: E701
+    elif case == Case.PASCAL: return to_pascal(text)  # noqa: E701
+    elif case == Case.SNAKE: return to_snake(text)  # noqa: E701
+    elif case == Case.TITLE: return to_title(text)  # noqa: E701
+    elif case == Case.UPPER: return to_upper(text)  # noqa: E701
+    else: raise ValueError(f'Unsupported case: {case}')  # noqa: E701
 
 
 # cli

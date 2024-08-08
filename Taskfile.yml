@@ -28,6 +28,11 @@ tasks:
     cmds:
       - pdm install --check --dev
 
+  lint:
+    desc: Run linters and code formatters.
+    cmds:
+      - ruff check
+
   gen:test_readme:
     internal: true
     sources: [README.md]

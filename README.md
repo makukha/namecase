@@ -1,11 +1,13 @@
 # caseutil ⇄ 🐍🐫🍢
+> Case convert and verify for Python: snake_case, camelCase, kebab-case, etc.
+> 
 [![license](https://img.shields.io/github/license/makukha/caseutil.svg)](https://github.com/makukha/caseutil/blob/main/LICENSE)
-[![Tests](https://raw.githubusercontent.com/makukha/caseutil/0.6.2/docs/badge/tests.svg)](https://github.com/makukha/caseutil)
-[![Coverage](https://raw.githubusercontent.com/makukha/caseutil/0.6.2/docs/badge/coverage.svg)](https://github.com/makukha/caseutil)
+[![Tests](https://raw.githubusercontent.com/makukha/caseutil/0.6.3/docs/badge/tests.svg)](https://github.com/makukha/caseutil)
+[![Coverage](https://raw.githubusercontent.com/makukha/caseutil/0.6.3/docs/badge/coverage.svg)](https://github.com/makukha/caseutil)
+[](https://api.securityscorecards.dev/projects/github.com/anuraghazra/github-readme-stats/badge)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/9342/badge)](https://www.bestpractices.dev/projects/9342) \
 [![pypi](https://img.shields.io/pypi/v/caseutil.svg)](https://pypi.python.org/pypi/caseutil)
 [![versions](https://img.shields.io/pypi/pyversions/caseutil.svg)](https://pypi.org/project/caseutil)
-
-Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 
 
 ## Features
@@ -18,7 +20,7 @@ Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 * 100% test coverage
 
 
-## Supported Cases
+### Supported cases
 
 | Case        | Example          | Functions                |
 |-------------|------------------|--------------------------|
@@ -32,13 +34,15 @@ Case convert and verify for Python: snake_case, camelCase, kebab-case, and more.
 | Title Space | My Variable Name | `is_title`, `to_title`   |
 
 
-## Installation
+## Getting Started
+
+### Installing
 
 ```bash
 $ pip install caseutil
 ```
 
-## Quick Start
+### Use as a library
 
 ```doctest
 >>> from caseutil import *
@@ -56,17 +60,23 @@ Convert to case:
 'my_variable_name'
 ```
 
-Use as command line tool, supports multiple values in argument or stdin:
+### Use as a CLI command
+
+Note the support of multiple values in argument or stdin:
+
 ```bash
 $ caseutil -c const "hi there"
 HI_THERE
+
 $ echo "hi_there\nsee you" | python -m caseutil -c camel
 hiThere
 seeYou
 ```
 
 
-## Universal Functions
+## Advanced
+
+### Universal functions
 
 Use functions `is_case()` and `to_case()` to deal with arbitrary case:
 ```doctest
@@ -75,6 +85,8 @@ True
 >>> to_case(Case.CONST, 'myVariableName')
 'MY_VARIABLE_NAME'
 ```
+
+### Case enum
 
 All supported cases are gathered in `Case` enum:
 ```python
@@ -89,8 +101,7 @@ class Case(StrEnum):
     UPPER = 'upper'
 ```
 
-
-## Tokenization
+### Tokenization
 
 Word separators are non-word characters including underscore, and places where text case is changed from lower to upper. Digits are not treated as separators. For more details, see this example and unit tests.
 
@@ -99,7 +110,7 @@ Word separators are non-word characters including underscore, and places where t
 ['some', 'really', 'ME', 'Ssy', 'text', 'wit4', 'Digits', '3Very', 'Wh3re']
 ```
 
-## Custom Separators
+### Custom Separators
 
 For custom separators, use `words()` function:
 ```doctest
@@ -109,15 +120,16 @@ For custom separators, use `words()` function:
 'my.Variable.Name'
 ```
 
-
-## Unicode
+### Unicode support
 
 Only ASCII names are supported. Unicode support is planned.
 
 
-## Developer Notes
+## Developing
 
-### OS X
+### Development environment
+
+#### OS X
 
 This project requires [Homebrew](https://brew.sh). Other tools like [PDM](https://pdm-project.org), [Tox](https://tox.wiki), and even [Alacritty](https://alacritty.org), will be installed automatically.
 
@@ -128,17 +140,29 @@ brew bundle
 task init install
 ```
 
-### Operations
+### Testing
 
-| Command        | Description                   |
-|----------------|-------------------------------|
-| `task init`    | Initialize system environment |
-| `task install` | Install Python environment    |
-| `task test`    | Run tests                     |
+```bash
+task test
+```
+
+### Contributing
+
+See [Contributing](.github/CONTRIBUTING.md) guidelines.
 
 
-### Plans
+### Roadmap
 
 * Add more test, explore edge cases
 * Add Unicode support (write tests)
 * Add more cases
+
+
+## Authors
+
+* Mchael Makukha — initial author.
+
+
+## License
+
+This project is licensed under the terms of the [MIT license](LICENSE).
